@@ -2,15 +2,18 @@ ul {
 	list-style: none;
 }
 .container {
-	margin-top: 100px;
+	margin-top: 50px;
 }
 .coffeName {
 	width: 100px;
-	border-right: 1px solid #000;
+}
+.coffe-table {
+	width: 790px;
+	margin: 0 auto;
 }
 
 .coffeTypes {
-	margin-left: 100px;
+	margin-left: 30px;
 	width: 560px;
 }
 .quantity {
@@ -25,5 +28,14 @@ ul {
 }
 .coffeItem:first-child{
 	border-left: 1px solid #000
+}
+.coffePrice {
+	width: 150px;
+	padding: .75rem 0px;
+}
+
+.price-list {
+	margin: 40px auto;
+	width: 60%
 }
 
