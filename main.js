@@ -29,8 +29,8 @@
      },
      methods: {
          countTotalAdd(par, par2){
-         	let uroundedPrice =  this.totalPrice + this.items[par].types[par2].price
-         	this.totalPrice = (+uroundedPrice.toFixed(10))
+         	let unroundedPrice =  this.totalPrice + this.items[par].types[par2].price
+         	this.totalPrice = (+unroundedPrice.toFixed(10))
 
          },
          addCoffe(par, par2) {
@@ -38,13 +38,17 @@
             this.countTotalAdd(par,par2)
          },
          countTotalDel(par, par2){
-         	let uroundedPrice =  this.totalPrice - this.items[par].types[par2].price
-         	this.totalPrice = (+uroundedPrice.toFixed(10))
+         	let unroundedPrice =  this.totalPrice - this.items[par].types[par2].price
+         	this.totalPrice = (+unroundedPrice.toFixed(10))
 
          },
          deleteCoffe(par, par2){
          	this.items[par].types[par2].quantity--
          	this.countTotalDel(par,par2)
+         },
+         addByInput(par, par2){
+         	let unroundedPrice = this.totalPrice + (this.items[par].types[par2].quantity * this.items[par].types[par2].price)
+         	this.totalPrice = (+unroundedPrice.toFixed(10))
          }
 
      }

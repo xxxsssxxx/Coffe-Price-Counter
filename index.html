@@ -20,21 +20,25 @@
 			</div>
 			<ul class="list-group coffe-table">
 				<li v-for="(item, i) in items" class="list-group-item d-flex align-items-center"><span class="coffeName"><b>{{item.name}}</b></span>
-					<ul class="list-group d-flex flex-row justify-content-between coffeTypes">
-						<li  class="d-flex coffeItem ml-1" v-for='(type, j) in item.types'><button class="btn btn-success" @click="addCoffe(i,j)">{{type.name}}</button>
-														<span class="quantity ml-4 mr-2">{{type.quantity}}</span>
+					<ul class="list-group d-flex flex-row justify-content-between coffeTypes w-100">
+						<li  class="d-flex coffeItem justify-content-between align-items-center" v-for='(type, j) in item.types'><button class="btn btn-success" @click="addCoffe(i,j)">{{type.name}}</button>
+														<span class="quantity mt-1 mb-1">{{type.quantity}}</span>
+														<input type="text" class="form-control quantity-input" v-model.lazy="type.quantity"  type="number" @keyup.enter = "addByInput(i,j)">
 														<button type="button " class="btn btn-danger" @click="deleteCoffe(i,j)" :disabled="totalPrice == 0 || type.quantity == 0">X</button></li>
 					</ul>
 				</li>
 			</ul>
-			<ul class="list-group list-group-flush  flex-row price-list">
+			<ul class="list-group list-group-flush  flex-row price-list w-50">
 				<li class="list-group-item" v-for="(item,i) in items"> <b class="mb-3">{{item.name}}</b>
 					<ul class="list-group ">
 						<li class="list-group-item coffePrice" v-for="(type,j) in item.types"> {{type.name}} : {{type.price}}$</li>
 					</ul>
 				</li>
 			</ul>
+			<div class="totall d-flex w-100 justify-content-between align-items-center">
 			<h6 class="display-4 mt-3"> Your total price is : {{totalPrice}} $</h6>
+			<button type="button" class="btn btn-outline-danger clear" @click="location.reload()"> Clear all</button>
+			</div>
 			<hr>
 		</div>
 	</div>
