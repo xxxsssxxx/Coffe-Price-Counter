@@ -23,7 +23,7 @@
 					<ul class="list-group d-flex flex-row justify-content-between coffeTypes w-100">
 						<li  class="d-flex coffeItem justify-content-between align-items-center" v-for='(type, j) in item.types'><button class="btn btn-success" @click="addCoffe(i,j)">{{type.name}}</button>
 														<span class="quantity mt-1 mb-1">{{type.quantity}}</span>
-														<input type="text" class="form-control quantity-input" v-model.lazy="type.quantity"  type="number" @keyup.enter = "addByInput(i,j)">
+														<input type="text" class="form-control quantity-input" v-model.lazy="type.quantity"  type="number" @change.self="addValidatedInput(i,j)"  @keyup.delete.self = "resetTotal(i,j)">
 														<button type="button " class="btn btn-danger" @click="deleteCoffe(i,j)" :disabled="totalPrice == 0 || type.quantity == 0">X</button></li>
 					</ul>
 				</li>

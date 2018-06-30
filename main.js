@@ -2,7 +2,7 @@
      el: '#app',
      data: {
          title: ' Count Your Coffe Price ',
-      	 totalPrice: 0,
+         totalPrice: 0,
          items: [{
                  name: "Espresso",
                  types: [{
@@ -13,43 +13,60 @@
              },
              {
                  name: "Latte",
-                 types: [{ name: 'small', quantity: 0,price: 1.99 },
-                     { name: 'medium', quantity: 0,price: 2.99 },
-                     { name: 'large', quantity: 0,price: 3.99 }
+                 types: [{ name: 'small', quantity: 0, price: 1.99 },
+                     { name: 'medium', quantity: 0, price: 2.99 },
+                     { name: 'large', quantity: 0, price: 3.99 }
                  ]
              },
              {
                  name: "Cappucino",
-                 types: [{ name: 'small', quantity: 0,  price: 1.75},
-                     { name: 'medium', quantity: 0,  price: 2.75},
-                     { name: 'large', quantity: 0 , price: 3.75 }
+                 types: [{ name: 'small', quantity: 0, price: 1.75 },
+                     { name: 'medium', quantity: 0, price: 2.75 },
+                     { name: 'large', quantity: 0, price: 3.75 }
                  ]
              }
          ]
      },
      methods: {
-         countTotalAdd(par, par2){
-         	let unroundedPrice =  this.totalPrice + this.items[par].types[par2].price
-         	this.totalPrice = (+unroundedPrice.toFixed(10))
+         countTotalAdd(par, par2) {
+             let unroundedPrice = this.totalPrice + this.items[par].types[par2].price
+             this.totalPrice = (+unroundedPrice.toFixed(10))
 
          },
          addCoffe(par, par2) {
-            this.items[par].types[par2].quantity++
-            this.countTotalAdd(par,par2)
+             this.items[par].types[par2].quantity++
+                 this.countTotalAdd(par, par2)
          },
-         countTotalDel(par, par2){
-         	let unroundedPrice =  this.totalPrice - this.items[par].types[par2].price
-         	this.totalPrice = (+unroundedPrice.toFixed(10))
+         countTotalDel(par, par2) {
+             let unroundedPrice = this.totalPrice - this.items[par].types[par2].price
+             this.totalPrice = (+unroundedPrice.toFixed(10))
 
          },
-         deleteCoffe(par, par2){
-         	this.items[par].types[par2].quantity--
-         	this.countTotalDel(par,par2)
+         deleteCoffe(par, par2) {
+             this.items[par].types[par2].quantity--
+             this.countTotalDel(par, par2)
          },
-         addByInput(par, par2){
-         	let unroundedPrice = this.totalPrice + (this.items[par].types[par2].quantity * this.items[par].types[par2].price)
-         	this.totalPrice = (+unroundedPrice.toFixed(10))
-         }
-
+         addByInput(par, par2) {
+             let unroundedPrice = this.totalPrice + (this.items[par].types[par2].quantity * this.items[par].types[par2].price)
+             this.totalPrice = (+unroundedPrice.toFixed(10))
+         },
+         validateEmptyForm(par,par2){
+         	if(this.items[par].types[par2].quantity === ""){
+         		this.items[par].types[par2].quantity = 0
+         		return true
+         	}
+         },
+         addValidatedInput(par, par2){
+         	this.validateEmptyForm(par,par2)
+         	this.addByInput(par,par2)
+         	},
+         	resetTotal(par,par2){
+         		let firstPrice = this.totalPrice
+         		let unroundedPrice = this.totalPrice - (this.items[par].types[par2].quantity * this.items[par].types[par2].price)
+         		this.totalPrice = (+unroundedPrice.toFixed(10))
+         		if(this.totalPrice < 0) {
+         			this.totalPrice = firstPrice 
+         		}
+         	}
      }
  })
